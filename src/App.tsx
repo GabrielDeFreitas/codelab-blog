@@ -1,7 +1,7 @@
 import Logo from "./assets/CodeLab.svg"
 import { Article, Container, Header, Navbar, Search } from "./components/"
 import { articles } from "./mock/articles"
-import { dateFormatter } from "./utils/date"
+import { dateFormatter } from "./utils/data-formatter"
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         <Navbar redirect="/" logo={Logo} alt="codelab" />
         <Search />
       </Header>
-      <Container role="group">
+      <Container role="main">
         {articles.map((article) => (
           <Article
             key={article.id}

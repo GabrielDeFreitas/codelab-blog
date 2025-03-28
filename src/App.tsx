@@ -1,10 +1,15 @@
 import Logo from "./assets/CodeLab.svg"
 import { Article, Container, Header, Navbar, Search } from "./components/"
-import { articles } from "./mock/articles"
+import { useGetArticles } from "./hooks/useArticles"
 import { dateFormatter } from "./utils/data-formatter"
 
 
 function App() {
+  const { data: articles, isLoading, error } = useGetArticles()
+
+  if (isLoading) return <p>loading...</p>
+  if (error) return <p>error: {error.message}</p>
+
   return (
     <>
       <Header role="group">
@@ -12,7 +17,7 @@ function App() {
         <Search />
       </Header>
       <Container role="main">
-        {articles.map((article) => (
+        {articles?.map((article) => (
           <Article
             key={article.id}
             date={dateFormatter(article.date)}

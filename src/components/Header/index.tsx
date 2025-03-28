@@ -1,12 +1,8 @@
-import { ReactNode } from "react"
+import { HeaderProps } from "./types";
 
-interface HeaderProps {
-    children: ReactNode
-}
-
-export function Header({children}: HeaderProps) {
+export function Header({ children, role }: HeaderProps) {
   return (
-    <header className="bg-dark-20 border-2 border-dark-40 rounded-md">
+    <header className="bg-dark-20 border-2 border-dark-40 rounded-md" role={role}>
       <div className="py-24 px-8 m-auto max-w-7xl flex flex-col justify-center items-center gap-16">
         {children}
       </div>

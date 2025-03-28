@@ -1,10 +1,6 @@
-interface ArticleProps {
-  date: string;
-  title: string;
-  description: string;
-}
+import { ArticleProps } from "./types";
 
-export function Article({date, title, description}: ArticleProps) {
+export function Article({ date, title, description }: ArticleProps) {
   return (
     <article className="col-span-12 p-10 border-2 border-dark-40 rounded-md bg-dark-20 cursor-pointer hover:border-brand-color">
       <header>

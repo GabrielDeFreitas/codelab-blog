@@ -1,4 +1,4 @@
-import { Article, Container, Error, Header, Loading, Navbar, Search } from "./components/"
+import { Article, Container, Error, Header, Loading, Navbar, Pagination, Search } from "./components/"
 import { useGetArticles } from "./hooks/useArticles"
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
             url={article.url}
           />
         ))}
+        <Pagination />
       </Container>
     </>
   )

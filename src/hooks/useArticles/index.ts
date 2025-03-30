@@ -15,7 +15,7 @@ interface Article {
 }
 
 const fetchArticles = async (): Promise<Article[]> => {
-    const response = await fetch("https://dev.to/api/articles?per_page=3", {
+    const response = await fetch("https://dev.to/api/articles?page=1&per_page=10", {
         headers: {
             "Content-Type": "application/json",
             "User-Agent": "CodeLabBlog",

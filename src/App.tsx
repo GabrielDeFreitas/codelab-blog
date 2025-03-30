@@ -1,13 +1,11 @@
 import { Article, Container, Error, Header, Loading, Navbar, Search } from "./components/"
 import { useGetArticles } from "./hooks/useArticles"
-import { dateFormatter } from "./utils/data-formatter"
-
 
 function App() {
   const { data: articles, isLoading, error } = useGetArticles()
 
   if (isLoading) return <Loading />
-  if (error) return <Error menssage={error.message} />
+  if (error) return <Error message={error.message} />
 
   return (
     <>
@@ -19,9 +17,10 @@ function App() {
         {articles?.map((article) => (
           <Article
             key={article.id}
-            date={dateFormatter(article.date)}
+            date={article.readable_publish_date}
             title={article.title}
             description={article.description}
+            url={article.url}
           />
         ))}
       </Container>

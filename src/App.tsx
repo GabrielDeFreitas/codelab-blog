@@ -1,4 +1,5 @@
 import { Article, Container, Error, Header, Loading, Navbar, Pagination, Search } from "./components/"
+import { ScrollToTop } from "./components/ScrollToTop"
 import { useGetArticles } from "./hooks/useArticles"
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         ))}
         <Pagination />
       </Container>
+      <ScrollToTop />
     </>
   )
 }

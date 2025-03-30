@@ -1,5 +1,4 @@
-import Logo from "./assets/CodeLab.svg"
-import { Article, Container, Header, Navbar, Search } from "./components/"
+import { Article, Container, Error, Header, Loading, Navbar, Search } from "./components/"
 import { useGetArticles } from "./hooks/useArticles"
 import { dateFormatter } from "./utils/data-formatter"
 
@@ -7,13 +6,13 @@ import { dateFormatter } from "./utils/data-formatter"
 function App() {
   const { data: articles, isLoading, error } = useGetArticles()
 
-  if (isLoading) return <p>loading...</p>
-  if (error) return <p>error: {error.message}</p>
+  if (isLoading) return <Loading />
+  if (error) return <Error menssage={error.message} />
 
   return (
     <>
       <Header role="group">
-        <Navbar redirect="/" logo={Logo} alt="codelab" />
+        <Navbar redirect="/" alt="codelab" />
         <Search />
       </Header>
       <Container role="main">

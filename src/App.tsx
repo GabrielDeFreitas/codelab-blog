@@ -1,9 +1,12 @@
+import { useState } from "react"
 import { Article, Container, Error, Header, Loading, Navbar, Pagination, Search } from "./components/"
 import { ScrollToTop } from "./components/ScrollToTop"
 import { useGetArticles } from "./hooks/useArticles"
 
 function App() {
-  const { data: articles, isLoading, error } = useGetArticles()
+  const [page, setPage] = useState(1)
+  const perPage = 10;
+  const { data: articles, isLoading, error } = useGetArticles(page, perPage)
 
   if (isLoading) return <Loading />
   if (error) return <Error message={error.message} />
@@ -24,7 +27,12 @@ function App() {
             url={article.url}
           />
         ))}
-        <Pagination />
+        <Pagination
+          currentPage={page}
+          onPageChange={setPage}
+          isPrevDisabled={page === 1}
+          isNextDisabled={articles && articles.length < perPage}
+        />
       </Container>
       <ScrollToTop />
     </>

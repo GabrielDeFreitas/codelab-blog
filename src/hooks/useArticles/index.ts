@@ -14,8 +14,10 @@ interface Article {
     };
 }
 
-const fetchArticles = async (): Promise<Article[]> => {
-    const response = await fetch("https://dev.to/api/articles?page=1&per_page=10", {
+const API_URL = "https://dev.to/api/articles"
+
+const fetchArticles = async (page: number, perPage: number): Promise<Article[]> => {
+    const response = await fetch(`${API_URL}?page=${page}&per_page=${perPage}`, {
         headers: {
             "Content-Type": "application/json",
             "User-Agent": "CodeLabBlog",
@@ -29,8 +31,8 @@ const fetchArticles = async (): Promise<Article[]> => {
     return response.json();
 };
 
-export const useGetArticles = () =>
+export const useGetArticles = (page: number, perPage: number) =>
     useQuery({
-        queryKey: ["articles"],
-        queryFn: fetchArticles,
+        queryKey: ["articles", page, perPage],
+        queryFn: () => fetchArticles(page, perPage),
     });

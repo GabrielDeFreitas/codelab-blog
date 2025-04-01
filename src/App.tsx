@@ -1,21 +1,26 @@
-import { useState } from "react"
-import { Article, Container, Error, Header, Loading, Navbar, Pagination, Search } from "./components/"
-import { ScrollToTop } from "./components/ScrollToTop"
-import { useGetArticles } from "./hooks/useArticles"
+
+import { useSearchParams } from "react-router";
+import { Article, Container, Error, Header, Loading, Navbar, Pagination } from "./components/";
+import { ScrollToTop } from "./components/ScrollToTop";
+import { useGetArticles } from "./hooks/useArticles";
 
 function App() {
-  const [page, setPage] = useState(1)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1", 10);
   const perPage = 10;
-  const { data: articles, isLoading, error } = useGetArticles(page, perPage)
+  const { data: articles, isLoading, error } = useGetArticles(page, perPage);
 
-  if (isLoading) return <Loading />
-  if (error) return <Error message={error.message} />
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: newPage.toString() });
+  };
+
+  if (isLoading) return <Loading />;
+  if (error) return <Error message={error.message} />;
 
   return (
     <>
       <Header role="group">
         <Navbar redirect="/" alt="codelab" />
-        <Search />
       </Header>
       <Container role="main">
         {articles?.map((article) => (
@@ -29,14 +34,14 @@ function App() {
         ))}
         <Pagination
           currentPage={page}
-          onPageChange={setPage}
+          onPageChange={handlePageChange}
           isPrevDisabled={page === 1}
           isNextDisabled={articles && articles.length < perPage}
         />
       </Container>
       <ScrollToTop />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

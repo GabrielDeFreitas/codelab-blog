@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 interface Article {
     id: number;
@@ -35,4 +35,5 @@ export const useGetArticles = (page: number, perPage: number) =>
     useQuery({
         queryKey: ["articles", page, perPage],
         queryFn: () => fetchArticles(page, perPage),
+        placeholderData: keepPreviousData
     });

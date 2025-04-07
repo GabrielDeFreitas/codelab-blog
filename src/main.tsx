@@ -8,12 +8,17 @@ import { RoutesUrls } from './utils/enums/index.tsx'
 
 const queryClient = new QueryClient()
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />
+    }
+  ],
   {
-    path: RoutesUrls.BASE_URL,
-    element: <App />
+    basename: RoutesUrls.BASE_URL
   }
-])
+)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -4,12 +4,13 @@ import './index.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { StrictMode } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import { RoutesUrls } from './utils/enums/index.tsx'
 
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: RoutesUrls.BASE_URL,
     element: <App />
   }
 ])

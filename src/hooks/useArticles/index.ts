@@ -1,4 +1,5 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { RoutesUrls } from "../../utils/enums";
 
 interface Article {
     id: number;
@@ -14,10 +15,8 @@ interface Article {
     };
 }
 
-const API_URL = "https://dev.to/api/articles"
-
 const fetchArticles = async (page: number, perPage: number): Promise<Article[]> => {
-    const response = await fetch(`${API_URL}?page=${page}&per_page=${perPage}`, {
+    const response = await fetch(`${RoutesUrls.API_URL}?page=${page}&per_page=${perPage}`, {
         headers: {
             "Content-Type": "application/json",
             "User-Agent": "CodeLabBlog",
@@ -35,5 +34,4 @@ export const useGetArticles = (page: number, perPage: number) =>
     useQuery({
         queryKey: ["articles", page, perPage],
         queryFn: () => fetchArticles(page, perPage),
-        placeholderData: keepPreviousData
     });
